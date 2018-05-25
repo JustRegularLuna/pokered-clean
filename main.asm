@@ -2087,3 +2087,10 @@ INCLUDE "engine/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 
 INCLUDE "engine/items/tm_prices.asm"
+
+
+
+SECTION "Trainer Parties",ROMX
+
+INCLUDE "engine/battle/read_trainer_party.asm"
+INCLUDE "data/trainer_parties.asm"

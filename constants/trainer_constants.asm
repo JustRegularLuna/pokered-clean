@@ -53,3 +53,11 @@ const_value = 1
 	trainer_const CHANNELER     ; $2D
 	trainer_const AGATHA        ; $2E
 	trainer_const LANCE         ; $2F
+
+
+
+; trainer type constants
+; used in data/trainer_parties.asm to define trainer party info
+const_value = 0
+	const TRAINERTYPE_NORMAL
+	const TRAINERTYPE_MOVES
