@@ -1297,11 +1297,7 @@ _MoveIsDisabledText::
 _MonName1Text::
 	text "<USER>@@"
 
-_Used1Text::
-	text ""
-	line "used @@"
-
-_Used2Text::
+_UsedText::
 	text ""
 	line "used @@"
 
@@ -1311,25 +1307,6 @@ _InsteadText::
 
 _CF4BText::
 	TX_RAM wcf4b
-	text "@"
-
-_ExclamationPoint1Text::
-	text "!"
-	done
-
-_ExclamationPoint2Text::
-	text "!"
-	done
-
-_ExclamationPoint3Text::
-	text "!"
-	done
-
-_ExclamationPoint4Text::
-	text "!"
-	done
-
-_ExclamationPoint5Text::
 	text "!"
 	done
 
