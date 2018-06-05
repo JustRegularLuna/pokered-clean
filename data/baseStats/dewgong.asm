@@ -8,7 +8,7 @@ db WATER ; species type 1
 db ICE ; species type 2
 db 75 ; catch rate
 db 176 ; base exp yield
-INCBIN "pic/bmon/dewgong.pic",0,1 ; 66, sprite dimensions
+INCBIN "pic/bmon/dewgong.pic",0,1 ; 77, sprite dimensions
 dw DewgongPicFront
 dw DewgongPicBack
 ; attacks known at lvl 0
@@ -25,4 +25,4 @@ db 0 ; growth rate
 	tmlearn 34,40
 	tmlearn 44
 	tmlearn 50,53,54
-db 0 ; padding
+db BANK(DewgongPicFront)
