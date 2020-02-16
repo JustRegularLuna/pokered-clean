@@ -101,10 +101,10 @@ wChannelFlags1:: ; c02e
 wChannelFlags2:: ; c036
 	ds 8
 
-wChannelDuties:: ; c03e
+wChannelDutyCycles:: ; c03e
 	ds 8
 
-wChannelDutyCycles:: ; c046
+wChannelDutyCyclePatterns:: ; c046
 	ds 8
 
 wChannelVibratoDelayCounters:: ; c04e
@@ -126,28 +126,28 @@ wChannelVibratoDelayCounterReloadValues:: ; c06e
 ; delay of the beginning of the vibrato from the start of the note
 	ds 8
 
-wChannelPitchBendLengthModifiers:: ; c076
+wChannelPitchSlideLengthModifiers:: ; c076
 	ds 8
 
-wChannelPitchBendFrequencySteps:: ; c07e
+wChannelPitchSlideFrequencySteps:: ; c07e
 	ds 8
 
-wChannelPitchBendFrequencyStepsFractionalPart:: ; c086
+wChannelPitchSlideFrequencyStepsFractionalPart:: ; c086
 	ds 8
 
-wChannelPitchBendCurrentFrequencyFractionalPart:: ; c08e
+wChannelPitchSlideCurrentFrequencyFractionalPart:: ; c08e
 	ds 8
 
-wChannelPitchBendCurrentFrequencyHighBytes:: ; c096
+wChannelPitchSlideCurrentFrequencyHighBytes:: ; c096
 	ds 8
 
-wChannelPitchBendCurrentFrequencyLowBytes:: ; c09e
+wChannelPitchSlideCurrentFrequencyLowBytes:: ; c09e
 	ds 8
 
-wChannelPitchBendTargetFrequencyHighBytes:: ; c0a6
+wChannelPitchSlideTargetFrequencyHighBytes:: ; c0a6
 	ds 8
 
-wChannelPitchBendTargetFrequencyLowBytes:: ; c0ae
+wChannelPitchSlideTargetFrequencyLowBytes:: ; c0ae
 	ds 8
 
 wChannelNoteDelayCounters:: ; c0b6
@@ -346,6 +346,7 @@ wSerialEnemyMonsPatchList:: ; c5d0
 wTempPic::
 wOverworldMap:: ; c6e8
 	ds 1300
+wOverworldMapEnd::
 
 wRedrawRowOrColumnSrcTiles:: ; cbfc
 ; the tiles of the row or column to be redrawn by RedrawRowOrColumn
@@ -1318,7 +1319,7 @@ wAIItem:: ; cf05
 ; the item that the AI used
 	ds 1
 
-wUsedItemOnWhichPokemon:: ; cf05
+wUsedItemOnWhichPokemon:: ; cf06
 	ds 1
 
 wAnimSoundID:: ; cf07
@@ -1641,7 +1642,7 @@ wPartyGainExpFlags:: ; d058
 
 wCurOpponent:: ; d059
 ; in a wild battle, this is the species of pokemon
-; in a trainer battle, this is the trainer class + 200
+; in a trainer battle, this is the trainer class + OPP_ID_OFFSET
 	ds 1
 
 wBattleType:: ; d05a
@@ -1769,7 +1770,7 @@ wPlayerNumHits:: ; d074
 wPlayerBideAccumulatedDamage:: ; d074
 ; the amount of damage accumulated by the player while biding (2 bytes)
 
-wUnknownSerialCounter2:: ; d075
+wUnknownSerialCounter2:: ; d074
 ; 2 bytes
 
 	ds 4
@@ -2921,7 +2922,7 @@ wFossilMon:: ; d710
 	ds 2
 
 wEnemyMonOrTrainerClass:: ; d713
-; trainer classes start at 200
+; trainer classes start at OPP_ID_OFFSET
 	ds 1
 
 wPlayerJumpingYScreenCoordsIndex:: ; d714
@@ -3086,7 +3087,7 @@ wCardKeyDoorX:: ; d740
 wFirstLockTrashCanIndex:: ; d743
 	ds 1
 
-wSecondLockTrashCanIndex:: ; d743
+wSecondLockTrashCanIndex:: ; d744
 	ds 1
 
 	ds 2

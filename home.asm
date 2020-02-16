@@ -2369,7 +2369,7 @@ EndTrainerBattle::
 	ld b, FLAG_SET
 	call TrainerFlagAction   ; flag trainer as fought
 	ld a, [wEnemyMonOrTrainerClass]
-	cp 200
+	cp OPP_ID_OFFSET
 	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
 	ld hl, wMissableObjectList
 	ld de, $2
@@ -2403,7 +2403,7 @@ InitBattleEnemyParameters::
 	ld a, [wEngagedTrainerClass]
 	ld [wCurOpponent], a
 	ld [wEnemyMonOrTrainerClass], a
-	cp 200
+	cp OPP_ID_OFFSET
 	ld a, [wEngagedTrainerSet]
 	jr c, .noTrainer
 	ld [wTrainerNo], a
@@ -3194,7 +3194,7 @@ WaitForSoundToFinish::
 	ret nz
 	push hl
 .waitLoop
-	ld hl, wChannelSoundIDs + Ch4
+	ld hl, wChannelSoundIDs + Ch5
 	xor a
 	or [hl]
 	inc hl
