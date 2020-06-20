@@ -333,10 +333,10 @@ GetCryData::
 	call BankswitchBack
 
 	; Cry headers have 3 channels,
-	; and start from index $14,
+	; and start from index CRY_SFX_START,
 	; so add 3 times the cry id.
 	ld a, b
-	ld c, $14
+	ld c, CRY_SFX_START
 	rlca ; * 2
 	add b
 	add c
@@ -1284,14 +1284,14 @@ CountSetBits::
 	ret
 
 ; subtracts the amount the player paid from their money
-; sets carry flag if there is enough money and unsets carry flag if not
+; OUTPUT: carry = 0(success) or 1(fail because there is not enough money)
 SubtractAmountPaidFromMoney::
 	jpba SubtractAmountPaidFromMoney_
 
 ; adds the amount the player sold to their money
 AddAmountSoldToMoney::
 	ld de, wPlayerMoney + 2
-	ld hl, $ffa1 ; total price of items
+	ld hl, hMoney + 2 ; total price of items
 	ld c, 3 ; length of money in bytes
 	predef AddBCDPredef ; add total price to money
 	ld a, MONEY_BOX
@@ -3543,7 +3543,7 @@ PrintLetterDelay::
 	pop hl
 	ret
 
-; Copies [hl, bc) to [de, bc - hl).
+; Copies [hl, bc) to [de, de + bc - hl).
 ; In other words, the source data is from hl up to but not including bc,
 ; and the destination is de.
 CopyDataUntil::
