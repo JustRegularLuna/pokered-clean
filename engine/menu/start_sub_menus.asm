@@ -1,4 +1,4 @@
-StartMenu_Pokedex:
+StartMenu_Pokedex::
 	predef ShowPokedexMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call Delay3
@@ -6,7 +6,7 @@ StartMenu_Pokedex:
 	call UpdateSprites
 	jp RedisplayStartMenu
 
-StartMenu_Pokemon:
+StartMenu_Pokemon::
 	ld a, [wPartyCount]
 	and a
 	jp z, RedisplayStartMenu
@@ -284,7 +284,7 @@ StartMenu_Pokemon:
 	db "@"
 
 ; writes a blank tile to all possible menu cursor positions on the party menu
-ErasePartyMenuCursors:
+ErasePartyMenuCursors::
 	coord hl, 0, 1
 	ld bc, 2 * 20 ; menu cursor positions are 2 rows apart
 	ld a, 6 ; 6 menu cursor positions
@@ -299,7 +299,7 @@ ItemMenuLoop:
 	call LoadScreenTilesFromBuffer2DisableBGTransfer ; restore saved screen
 	call RunDefaultPaletteCommand
 
-StartMenu_Item:
+StartMenu_Item::
 	ld a, [wLinkState]
 	dec a ; is the player in the Colosseum or Trade Centre?
 	jr nz, .notInCableClubRoom
@@ -446,57 +446,11 @@ CannotGetOffHereText:
 	TX_FAR _CannotGetOffHereText
 	db "@"
 
-; items which bring up the party menu when used
-UsableItems_PartyMenu:
-	db MOON_STONE
-	db ANTIDOTE
-	db BURN_HEAL
-	db ICE_HEAL
-	db AWAKENING
-	db PARLYZ_HEAL
-	db FULL_RESTORE
-	db MAX_POTION
-	db HYPER_POTION
-	db SUPER_POTION
-	db POTION
-	db FIRE_STONE
-	db THUNDER_STONE
-	db WATER_STONE
-	db HP_UP
-	db PROTEIN
-	db IRON
-	db CARBOS
-	db CALCIUM
-	db RARE_CANDY
-	db LEAF_STONE
-	db FULL_HEAL
-	db REVIVE
-	db MAX_REVIVE
-	db FRESH_WATER
-	db SODA_POP
-	db LEMONADE
-	db X_ATTACK
-	db X_DEFEND
-	db X_SPEED
-	db X_SPECIAL
-	db PP_UP
-	db ETHER
-	db MAX_ETHER
-	db ELIXER
-	db MAX_ELIXER
-	db $ff
+INCLUDE "data/party_items.asm"
 
-; items which close the item menu when used
-UsableItems_CloseMenu:
-	db ESCAPE_ROPE
-	db ITEMFINDER
-	db POKE_FLUTE
-	db OLD_ROD
-	db GOOD_ROD
-	db SUPER_ROD
-	db $ff
+INCLUDE "data/overworld_items.asm"
 
-StartMenu_TrainerInfo:
+StartMenu_TrainerInfo::
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites
@@ -684,7 +638,7 @@ TrainerInfo_DrawVerticalLine:
 	jr nz, .loop
 	ret
 
-StartMenu_SaveReset:
+StartMenu_SaveReset::
 	ld a, [wd72e]
 	bit 6, a ; is the player using the link feature?
 	jp nz, Init
@@ -692,7 +646,7 @@ StartMenu_SaveReset:
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	jp HoldTextDisplayOpen
 
-StartMenu_Option:
+StartMenu_Option::
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call ClearScreen
@@ -703,7 +657,7 @@ StartMenu_Option:
 	call UpdateSprites
 	jp RedisplayStartMenu
 
-SwitchPartyMon:
+SwitchPartyMon::
 	call SwitchPartyMon_InitVarOrSwapData ; swap data
 	ld a, [wSwappedMenuItem]
 	call SwitchPartyMon_ClearGfx

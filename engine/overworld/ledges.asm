@@ -1,4 +1,4 @@
-HandleLedges:
+HandleLedges::
 	ld a, [wd736]
 	bit 6, a ; already jumping down ledge
 	ret nz
@@ -54,17 +54,7 @@ HandleLedges:
 	call PlaySound
 	ret
 
-	; (player direction) (tile player standing on) (ledge tile) (input required)
-LedgeTiles:
-	db SPRITE_FACING_DOWN, $2C,$37,D_DOWN
-	db SPRITE_FACING_DOWN, $39,$36,D_DOWN
-	db SPRITE_FACING_DOWN, $39,$37,D_DOWN
-	db SPRITE_FACING_LEFT, $2C,$27,D_LEFT
-	db SPRITE_FACING_LEFT, $39,$27,D_LEFT
-	db SPRITE_FACING_RIGHT,$2C,$0D,D_RIGHT
-	db SPRITE_FACING_RIGHT,$2C,$1D,D_RIGHT
-	db SPRITE_FACING_RIGHT,$39,$0D,D_RIGHT
-	db $FF
+INCLUDE "data/ledge_tiles.asm"
 
 LoadHoppingShadowOAM:
 	ld hl, vChars1 + $7f0
@@ -78,7 +68,7 @@ LoadHoppingShadowOAM:
 	ret
 
 LedgeHoppingShadow:
-	INCBIN "gfx/ledge_hopping_shadow.1bpp"
+	INCBIN "gfx/overworld/shadow.1bpp"
 LedgeHoppingShadowEnd:
 
 LedgeHoppingShadowOAM:

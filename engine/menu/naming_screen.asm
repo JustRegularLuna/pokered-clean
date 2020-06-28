@@ -53,7 +53,7 @@ DoYouWantToNicknameText:
 	TX_FAR _DoYouWantToNicknameText
 	db "@"
 
-DisplayNameRaterScreen:
+DisplayNameRaterScreen::
 	ld hl, wBuffer
 	xor a
 	ld [wUpdateSpritesEnabled], a
@@ -332,7 +332,7 @@ LoadEDTile:
 	jp CopyVideoDataDouble
 
 ED_Tile:
-	INCBIN "gfx/ED_tile.1bpp"
+	INCBIN "gfx/font/ED.1bpp"
 ED_TileEnd:
 
 PrintAlphabet:
@@ -365,11 +365,7 @@ PrintAlphabet:
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
 
-LowerCaseAlphabet:
-	db "abcdefghijklmnopqrstuvwxyz ×():;[]",$e1,$e2,"-?!♂♀/⠄,¥UPPER CASE@"
-
-UpperCaseAlphabet:
-	db "ABCDEFGHIJKLMNOPQRSTUVWXYZ ×():;[]",$e1,$e2,"-?!♂♀/⠄,¥lower case@"
+INCLUDE "text/alphabets.asm"
 
 PrintNicknameAndUnderscores:
 	call CalcStringLength
@@ -439,21 +435,7 @@ DakutensAndHandakutens:
 	ld [wNamingScreenLetter], a
 	ret
 
-Dakutens:
-	db "かが", "きぎ", "くぐ", "けげ", "こご"
-	db "さざ", "しじ", "すず", "せぜ", "そぞ"
-	db "ただ", "ちぢ", "つづ", "てで", "とど"
-	db "はば", "ひび", "ふぶ", "へべ", "ほぼ"
-	db "カガ", "キギ", "クグ", "ケゲ", "コゴ"
-	db "サザ", "シジ", "スズ", "セゼ", "ソゾ"
-	db "タダ", "チヂ", "ツヅ", "テデ", "トド"
-	db "ハバ", "ヒビ", "フブ", "へべ", "ホボ"
-	db $ff
-
-Handakutens:
-	db "はぱ", "ひぴ", "ふぷ", "へぺ", "ほぽ"
-	db "ハパ", "ヒピ", "フプ", "へぺ", "ホポ"
-	db $ff
+INCLUDE "text/dakutens.asm"
 
 ; calculates the length of the string at wcf4b and stores it in c
 CalcStringLength:

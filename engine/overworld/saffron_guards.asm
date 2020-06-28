@@ -1,4 +1,4 @@
-RemoveGuardDrink:
+RemoveGuardDrink::
 	ld hl, GuardDrinksList
 .drinkLoop
 	ld a, [hli]
@@ -12,5 +12,4 @@ RemoveGuardDrink:
 	jr z, .drinkLoop
 	jpba RemoveItemByID
 
-GuardDrinksList:
-	db FRESH_WATER, SODA_POP, LEMONADE, $00
+INCLUDE "data/guard_drink_items.asm"

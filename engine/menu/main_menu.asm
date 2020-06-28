@@ -312,7 +312,7 @@ StartNewGame:
 	call DelayFrames
 
 ; enter map after using a special warp or loading the game from the main menu
-SpecialEnterMap:
+SpecialEnterMap::
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
@@ -456,7 +456,7 @@ DisplayOptionMenu:
 	ld [wLastMenuItem], a
 	inc a
 	ld [wLetterPrintingDelayFlags], a
-	ld [wUnusedCD40], a
+	ld [wOptionsCancelCursorX], a
 	ld a, 3 ; text speed cursor Y coordinate
 	ld [wTopMenuItemY], a
 	call SetCursorPositionsFromOptions

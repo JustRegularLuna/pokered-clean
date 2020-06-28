@@ -1,4 +1,4 @@
-VendingMachineMenu:
+VendingMachineMenu::
 	ld hl, VendingMachineText1
 	call PrintText
 	ld a, MONEY_BOX
@@ -130,10 +130,4 @@ LoadVendingMachineItem:
 	ld [hVendingMachinePrice + 2], a
 	ret
 
-VendingPrices:
-	db FRESH_WATER
-	money 200
-	db SODA_POP
-	money 300
-	db LEMONADE
-	money 350
+INCLUDE "data/vending_prices.asm"

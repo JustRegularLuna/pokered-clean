@@ -1,5 +1,5 @@
 ; only used for setting bit 2 of wd736 upon entering a new map
-IsPlayerStandingOnWarp:
+IsPlayerStandingOnWarp::
 	ld a, [wNumberOfWarps]
 	and a
 	ret z
@@ -31,7 +31,7 @@ IsPlayerStandingOnWarp:
 	jr nz, .loop
 	ret
 
-CheckForceBikeOrSurf:
+CheckForceBikeOrSurf::
 	ld hl, wd732
 	bit 5, [hl]
 	ret nz
@@ -84,7 +84,7 @@ CheckForceBikeOrSurf:
 
 INCLUDE "data/force_bike_surf.asm"
 
-IsPlayerFacingEdgeOfMap:
+IsPlayerFacingEdgeOfMap::
 	push hl
 	push de
 	push bc
@@ -150,19 +150,19 @@ IsPlayerFacingEdgeOfMap:
 	scf
 	ret
 
-IsWarpTileInFrontOfPlayer:
+IsWarpTileInFrontOfPlayer::
 	push hl
 	push de
 	push bc
 	call _GetTileAndCoordsInFrontOfPlayer
 	ld a, [wCurMap]
 	cp SS_ANNE_BOW
-	jr z, .ssAnne5
+	jr z, IsSSAnneBowWarpTileInFrontOfPlayer
 	ld a, [wSpriteStateData1 + 9] ; player sprite's facing direction
 	srl a
 	ld c, a
 	ld b, 0
-	ld hl, .warpTileListPointers
+	ld hl, WarpTileListPointers
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -176,35 +176,19 @@ IsWarpTileInFrontOfPlayer:
 	pop hl
 	ret
 
-.warpTileListPointers:
-	dw .facingDownWarpTiles
-	dw .facingUpWarpTiles
-	dw .facingLeftWarpTiles
-	dw .facingRightWarpTiles
+INCLUDE "data/warp_carpet_tile_ids.asm"
 
-.facingDownWarpTiles
-	db $01,$12,$17,$3D,$04,$18,$33,$FF
-
-.facingUpWarpTiles
-	db $01,$5C,$FF
-
-.facingLeftWarpTiles
-	db $1A,$4B,$FF
-
-.facingRightWarpTiles
-	db $0F,$4E,$FF
-
-.ssAnne5
+IsSSAnneBowWarpTileInFrontOfPlayer:
 	ld a, [wTileInFrontOfPlayer]
 	cp $15
 	jr nz, .notSSAnne5Warp
 	scf
-	jr .done
+	jr IsWarpTileInFrontOfPlayer.done
 .notSSAnne5Warp
 	and a
-	jr .done
+	jr IsWarpTileInFrontOfPlayer.done
 
-IsPlayerStandingOnDoorTileOrWarpTile:
+IsPlayerStandingOnDoorTileOrWarpTile::
 	push hl
 	push de
 	push bc
@@ -233,7 +217,7 @@ IsPlayerStandingOnDoorTileOrWarpTile:
 
 INCLUDE "data/warp_tile_ids.asm"
 
-PrintSafariZoneSteps:
+PrintSafariZoneSteps::
 	ld a, [wCurMap]
 	cp SAFARI_ZONE_EAST
 	ret c

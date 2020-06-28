@@ -68,7 +68,7 @@ MoveBoulderDustFunctionPointerTable:
 	db $FF,$01
 	dw AdjustOAMBlockXPos
 
-LoadSmokeTileFourTimes:
+LoadSmokeTileFourTimes::
 	ld hl, vChars1 + $7c0
 	ld c, $4
 .loop
@@ -89,5 +89,5 @@ LoadSmokeTile:
 	jp CopyVideoData
 
 SSAnneSmokePuffTile:
-	INCBIN "gfx/ss_anne_smoke_puff.2bpp"
+	INCBIN "gfx/overworld/smoke.2bpp"
 SSAnneSmokePuffTileEnd:

@@ -1,4 +1,4 @@
-UseItem_:
+UseItem_::
 	ld a, 1
 	ld [wActionResultOrTookBattleTurn], a ; initialise to success value
 	ld a, [wcf91] ;contains item_ID
@@ -2588,7 +2588,7 @@ GetSelectedMoveOffset2:
 ; [wItemQuantity] = quantity to toss
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
-TossItem_:
+TossItem_::
 	push hl
 	ld a, [wcf91]
 	call IsItemHM
@@ -2657,7 +2657,7 @@ TooImportantToTossText:
 ; [wIsKeyItem] = result
 ; 00: item is not key item
 ; 01: item is key item
-IsKeyItem_:
+IsKeyItem_::
 	ld a, $01
 	ld [wIsKeyItem], a
 	ld a, [wcf91]
@@ -2881,10 +2881,7 @@ IsNextTileShoreOrWater:
 	and a
 	ret
 
-; tilesets with water
-WaterTilesets:
-	db OVERWORLD, FOREST, DOJO, GYM, SHIP, SHIP_PORT, CAVERN, FACILITY, PLATEAU
-	db $ff ; terminator
+INCLUDE "data/water_tilesets.asm"
 
 ReadSuperRodData:
 ; return e = 2 if no fish on this map
